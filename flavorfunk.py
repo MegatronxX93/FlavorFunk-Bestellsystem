@@ -96,7 +96,7 @@ class BestellungenVerwaltung:
         """
         Zeigt Bestellungen an und ermöglicht Stornierungen.
         """
-        st.header("Bestellungen")
+        st.header("Bestellübersicht")
         tischnummern_lst = st.session_state.bestellungen_df["Tischnummer"].unique()
         ausgewaehlte_tischnummer = st.selectbox("Tischnummer auswählen:", tischnummern_lst)
 
@@ -109,7 +109,7 @@ class BestellungenVerwaltung:
         if gefiltertes_df.empty:
             st.info(f"Keine Bestellungen für Tischnummer {ausgewaehlte_tischnummer} vorhanden.")
         else:
-            st.subheader(f"Bestellungen für Tischnummer {ausgewaehlte_tischnummer}")
+            st.subheader(f"Tischnummer {ausgewaehlte_tischnummer}")
             st.dataframe(gefiltertes_df, width=1000)
 
             # Stornieroption
@@ -206,7 +206,7 @@ def main():
 
     # Optionen und deren Ausführung
     if menu_option == "Speisekarte anzeigen":
-        st.header("Speisekarte")
+        st.header("Golden Seagull - Speisekarte")
         st.dataframe(speisekarte_df, width=900)
 
     elif menu_option == "Neue Bestellung erstellen":
@@ -237,7 +237,7 @@ def main():
 
         # Ausgabe der Rechnung des jeweiligen Tisches
         if tischnummer:
-            st.subheader("Bestelldetails:")
+            st.subheader("Rechnungsdetails:")
             rechnung = verwaltung.bezahlung(tischnummer, "")
             if rechnung:
                 for detail in rechnung["details"]:
